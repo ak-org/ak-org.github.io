@@ -8,7 +8,11 @@
 
   <div id="vis"></div>
 
-  <script type="text/javascript">
+ 
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.0-beta.38/vega.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.0-beta.6/vega-lite.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-beta.19/vega-embed.js"></script>
+   <script type="text/javascript">
     var yourVlSpec = {
       "$schema": "https://vega.github.io/schema/vega-lite/v2.0.json",
       "description": "A simple bar chart with embedded data.",
@@ -27,8 +31,5 @@
     }
     vega.embed("#vis", yourVlSpec);
   </script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.0-beta.38/vega.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.0-beta.6/vega-lite.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-beta.19/vega-embed.js"></script>
 </body>
 </html>
