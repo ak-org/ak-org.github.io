@@ -13,6 +13,8 @@
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
     <link href="css/starter-template.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vega-tooltip/0.4.2/vega-tooltip.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -39,7 +41,9 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="stem.html">Home</a></li>
-            <li ><a  href="about.html">About the Visualization </a></li>
+            <li ><a href="second.html">Scene2</a></li>
+            <li ><a href="jumpoff.html">Scene3</a></li>
+            <li ><a href="final.html">Final</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -47,16 +51,18 @@
 
     <!-- Begin page content -->
 
+
+
         <div class="container">
 
           <div class="page-header">
             <h1>Poverty and Heart disease mortality rate in United States</h1>
           </div>
-          <p class="lead">Despite being the most powerful and prosperous nation on the planet,
-                          the offical poverty rate in <b>United States of America</b> is 13.5 percent, based on the U.S Census Bureau's 2015 estimate.</p>
+          <p class="lead">
+                          According to the U.S Census Bureau's 2015 estimate, the offical poverty rate in <b>United States of America</b> is 13.5 percent.</p>
 
                          <div class="text-center">
-                         <a href="https://poverty.ucdavis.edu/faq/what-current-poverty-rate-united-states">
+                         <a href="https://poverty.ucdavis.edu/faq/what-current-poverty-rate-united-states" target="_blank">
                                   <p class="lead">https://poverty.ucdavis.edu/faq/what-current-poverty-rate-united-states</p></a>
                          </div>
           <p class="lead">
@@ -68,6 +74,40 @@
                          </p>
          <br>
          <br>
+         <div class="container" id="vegaChart">
+
+           <div class="stemVis" id="stemVis">
+
+           </div>
+        </div>
+
+         <div class="container" id="aboutVisualization" style="padding-bottom: 30px;">
+           <button class="accordion">About the Visualization, Home Page</button>
+              <div class="panel" >
+                <p class="lead" >The project follows the <strong>Martini Glass</strong> narrative visualization structure.
+                The <strong>Home page</strong>  represents the base of the visualization structure. The user is being exposed
+                to the author driven content and will be led through two additional scenes representing stem. The Scene3
+                page is the "jumping off point" and leads user to the final page.
+                Final page contains reader driven content and it allows users to draw their own conclusions.
+                </p>
+                <p class="lead">The chart was built using Vega-lite.</p>
+                <h3>User Interface Events</h3>
+                <p class="lead" >The buttons in the navigation bar and the Prev, Next button
+                   at the bottom of this page enable the User Interface events.
+                   User interacts by clicking on the button or menu items to navigate to various part of this story.
+                </p>
+                <h3>Annotations</h3>
+                  <p class="lead" >The annotation is represented by the legend on the top-right of the chart.</p>
+                <h3>Triggers</h3>
+                <p class="lead" >The mouse click acts as a trigger event.
+                </p>
+                <h3>Parameters</h3>
+                <p class="lead" >This section is hyper linked to the next section. The name of the target section is passed
+                                 as an input paramter to the button and navgiation bar items.
+
+              </div>
+
+         </div>
          <div class="container">
            <div class="col-lg-12 text-center" >
            <a href="second.html">
@@ -87,13 +127,24 @@
       <footer class="footer   text-center">
         <div class="container">
           <p class="text-muted"></p>
-          <strong>Designed by <a href="https://www.linkedin.com/in/akumar6/">Ashish Kumar</a></strong>
+          <strong>Author <a href="https://www.linkedin.com/in/akumar6/"  target="_blank">Ashish Kumar</a></strong>
         </div>
 
       </footer>
 
 
-
+      <div id="myModal" class="modal hide fade">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> × </button>
+              <h3 id="myModalLabel">Modal header</h3>
+          </div>
+          <div class="modal-body">
+             <h1>This is the test page</h1>
+          </div>
+          <div class="modal-footer">
+              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+          </div>
+      </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -105,6 +156,11 @@
           crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.1.0/topojson.min.js"></script>
-  <script src="/lib/globe.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.0-beta.38/vega.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.0-beta.6/vega-lite.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-beta.19/vega-embed.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-tooltip/0.4.2/vega-tooltip.min.js"></script>
+  <script src="lib/stem.js"></script>
+
 </body>
 </html>
