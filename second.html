@@ -54,6 +54,9 @@
 
     <!-- Begin page content -->
 
+    <!-- Placeholder for the tooltip -->
+    <div id="vis-tooltip" class="vg-tooltip"></div>
+
         <div class="container">
 
           <div class="page-header">
@@ -70,12 +73,12 @@
 
 
 
-                         <div class="container" id="vegaChart">
+                         <!-- <div class="container" id="vegaChart"> -->
 
                            <div class="secondVis" id="secondVis">
 
                            </div>
-                        </div>
+                        <!-- </div>-->
 
                          <div class="container" id="aboutVisualization" style="padding-bottom: 30px;">
                            <button class="accordion">About the Visualization, Second Chapter</button>
@@ -92,7 +95,7 @@
                                    User interacts by clicking on the button or menu items to navigate to various part of this visualzation story.
                                 </p>
                                 <h3>Annotations</h3>
-                                  <p class="lead" >The annotation is represented by the legend on the top-right of the chart.</p>
+                                  <p class="lead" >The annotation is represented by the legend on the top-right of the chart and a tooltip when mouse is hovered over the bars in the chart.</p>
                                 <h3>Triggers</h3>
                                 <p class="lead" >The mouse click event acts as a trigger to faciliate back and forward navigation in this visualization presentation.
                                 </p>
@@ -153,6 +156,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.0-beta.6/vega-lite.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-beta.19/vega-embed.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-tooltip/0.4.2/vega-tooltip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-beta.14/vega-embed.min.js"></script>
   <script src="lib/second.js"></script>
 </body>
 </html>
