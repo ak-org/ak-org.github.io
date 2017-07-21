@@ -132,22 +132,42 @@
         <div class="container">
           <p class="text-muted"></p>
           <strong>Author <a href="https://www.linkedin.com/in/akumar6/"  target="_blank">Ashish Kumar</a></strong>
+          <br><a data-toggle="modal" data-target="#myModal" href="#myModal">Software Citation</a>
         </div>
 
       </footer>
 
 
-      <div id="myModal" class="modal hide fade">
-          <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> × </button>
-              <h3 id="myModalLabel">Modal header</h3>
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Following software was used for this visualization project.</h4>
+            </div>
+            <div class="modal-body">
+              <h4>
+                <a href="//getbootstrap.com" target="_blank" >Bootstrap for HTML5</a>
+              </h4>
+              <h4>
+                <a href="//jquery.com" target="_blank" >jQuery (Required for Boostrap plugins)</a>
+              </h4>
+              <h4>
+                <a href="//d3js.org" target="_blank" >D3.js (v4)</a>
+              </h4>
+              <h4>
+                <a href="//vega.github.io/vega-lite/" target="_blank" >Vega-Lite</a>
+              </h4>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
           </div>
-          <div class="modal-body">
-             <h1>This is the test page</h1>
-          </div>
-          <div class="modal-footer">
-              <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-          </div>
+        </div>
       </div>
 
     <!-- Bootstrap core JavaScript
