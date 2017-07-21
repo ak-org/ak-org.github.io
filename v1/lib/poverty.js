@@ -74,6 +74,7 @@ var state_names = [
 
 name_id_map = {};
 id_name_map = {};
+id_code_map = {};
 
 poverty_data = {};
 heart_disease_data = {};
@@ -81,6 +82,11 @@ overall_rate = {};
 overall_rate_by_state = [];
 clean_hd_data = [];
 //generic functions
+
+
+// Prep the tooltip bits, initial display is hidden
+
+
 
 function Interpolate(start, end, steps, count) {
     var s = start,
@@ -141,6 +147,7 @@ d3.tsv("/data/us-state-names.tsv", function(error, names) {
 for (var i = 0; i < names.length; i++) {
   name_id_map[names[i].name] = names[i].id;
   id_name_map[names[i].id] = names[i].name;
+  id_code_map[names[i].id] = names[i].code;
 }
 });
 
@@ -156,6 +163,7 @@ function makeMap(svgId) {
               .offset([-10,0])
               .html(function(d) {
                 var stateName = id_name_map[d.id];
+                stateCode = id_code_map[d.id];
                 var povertypercentage = poverty_data[stateName][3];
                 return "<span class='details'>" +
                        stateName + "<br>" +
@@ -191,6 +199,9 @@ function makeMap(svgId) {
 
   svg.call(tip);
 
+  var statetip;
+
+
 
    d3.json("https://s3-us-west-2.amazonaws.com/vida-public/geo/us.json", function(error, us) {
              if (error) throw error;
@@ -204,6 +215,7 @@ function makeMap(svgId) {
                .enter().append("path")
                .style("fill", function(d) {
                    var stateName = id_name_map[d.id];
+
 
                    if (stateName == undefined) return;
                    //return scaleColor(poverty_data[stateName][3]);
@@ -244,15 +256,57 @@ function makeMap(svgId) {
                })
                .on("click", function(d,i) {
                   var stateName = id_name_map[d.id];
-                  console.log("You clicked on ", stateName);
+                  var stateCode = id_code_map[d.id];
+                  var centroid = path.centroid(d);
+                  //console.log("[MakeMap] You clicked on ", stateName);
+                  var xPosition = d3.mouse(this)[0] - 5;
+                  var yPosition = d3.mouse(this)[1] - 5;
+                  //console.log(xPosition,yPosition,centroid);
+                  statetip.attr("transform", "translate(" + d.x +  "," + d.y + ")")
+                          .attr("x", centroid[0])
+                          .attr("y", centroid[1])
+                          .attr("text-anchor", "middle")
+                          .attr("font-weight", "1.2em")
+                          .text(stateCode);
+                  if ( (stateCode == "NM") ||
+                       (stateCode == "AR") ||
+                       (stateCode == "LA") ||
+                       (stateCode == "MS") ||
+                       (stateCode == "AL") ||
+                       (stateCode == "KY") ||
+                       (stateCode == "WV") ){
+                              $('.statetip').css({ fill: "#E0F7FA" });
+                        } else {
+                              $('.statetip').css({ fill: "#212121"});
+                        }
+
+
+
                   makeBar(".chart1", stateName);
-                  makeBar2(".chart2", stateName);
+                  //makeBar2(".chart2", stateName);
                })
-               .attr("d", path);
+               .attr("d", path)
+               .exit()
+               .remove()
+               .selectAll(".statetip")
+               .style("display","none");
+
+
+
+               statetip = svg.append("text")
+                                 .attr("class", "statetip")
+                                 .style("display", "inline")
+                                 .attr("x", 62.50196478975809)
+                                 .attr("y", 142.86361231212803)
+                                 .text("CA")
+                                 .style("fill","#212121");
 
              svg.append("path")
                  .attr("class", "state-borders")
                  .attr("d", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })));
+
+
+
            });
 
 }
@@ -273,6 +327,8 @@ function makeBar(svgId, stateName) {
               poverty_data[stateName][2],
               poverty_data[stateName][3]];
 
+
+
    var barChartLabels = ["0 - 5 Years ",
                  "0 -17 Years ",
                  "5 - 17 Years ",
@@ -286,10 +342,12 @@ function makeBar(svgId, stateName) {
    var y = d3.scaleBand().range([height,0]).padding(0.1);
 
    //var yScale = d3.scaleOrdinal([0, height]);
-   y.domain(data.map(function(d,i) {console.log(d,i,barChartLabels[i]); return barChartLabels[i]; }));
+   y.domain(data.map(function(d,i) {
+     //console.log(d,i,barChartLabels[i]);
+     return barChartLabels[i];
+   }));
 
    var svgBar = d3.select(".svgBar");
-
 
 
    var ordinal = d3.scaleOrdinal()
@@ -300,17 +358,6 @@ function makeBar(svgId, stateName) {
 
    d3.select("#barTitle1")
      .html("Poverty Level in <strong>" + stateName + "</strong> for various age groups");
-
-   /*
-   d3.select(".chart1")
-     .attr("x",0)
-     .attr("y",0)
-     .attr("alignment-baseline","middle")
-     .attr("text-anchor","end")
-     .text(barChartLabels[0]);
-   */
-
-
 
    d3.select(svgId)
    .selectAll("div")
@@ -324,6 +371,8 @@ function makeBar(svgId, stateName) {
         .style("opacity", 0)
         .attr("transform", "translate(0," + (height + margin.top + margin.bottom) + ")")
         .remove();
+
+
 
    d3.select(".chart1")
         .selectAll("div").transition()
@@ -394,10 +443,42 @@ var processPovertyData = function(err,data) {
   //console.log(poverty_data);
 
   makeMap("#map1-svg", MAP1_TITLE);
+  povertyMapLegend();
   makeBar(".chart1", "California");
 
 }
 
+function povertyMapLegend() {
+  var linear = d3.scaleLinear()
+  .domain([8.4,13,22])
+  .range([GREEN,YELLOW,RED]);
+
+  var quantize = d3.scaleQuantize()
+          .domain([8.4,22.1])
+          .range([GREEN,YELLOW,RED]);
+
+
+  var svg = d3.select(".map1-legend");
+
+  svg.append("g")
+    .attr("class", "legendLinear")
+    .attr("x", 10)
+    .attr("y", 50)
+    .attr("width", "500")
+    .attr("text-anchor", "right")
+    .attr("transform", "translate(80,20)");
+
+  var legendLinear = d3.legendColor()
+    .shapeWidth(20)
+    .cells(3)
+    .shapePadding(5)
+    .titleWidth(100)
+    .orient('vertical')
+    .scale(quantize);
+
+  svg.select(".legendLinear")
+    .call(legendLinear);
+}
 
 /////////////// crate map for heart disease /////////////
 
@@ -409,11 +490,13 @@ function makeMap2(svgId) {
   var width = WIDTH,
       height = HEIGHT;
 
+
   var tip = d3.tip()
               .attr('class', 'd3-tip')
               .offset([-10,0])
               .html(function(d) {
                 var stateName = id_name_map[d.id];
+                stateCode = id_code_map[d.id];
                 var hdRate = overall_rate[stateName];
                 return "<span class='details'>" +
                        stateName + "<br>" +
@@ -421,13 +504,13 @@ function makeMap2(svgId) {
                               hdRate + " / 100K Adults" ;
               });
 
+  var statetip2;
 
   var zoom = d3.zoom()
       // no longer in d3 v4 - zoom initialises with zoomIdentity, so it's already at origin
       // .translate([0, 0])
       // .scale(1)
-      .scaleExtent([1, 8])
-      .on("zoom", zoomed);
+      .scaleExtent([1, 8]);
 
   var quantize = d3.scaleQuantize()
           .domain([220,460])
@@ -463,10 +546,6 @@ function makeMap2(svgId) {
    d3.json("https://s3-us-west-2.amazonaws.com/vida-public/geo/us.json", function(error, us) {
              if (error) throw error;
 
-
-
-
-
                svg.append("g").attr("class", "states")
                .selectAll("path")
                .data(topojson.feature(us, us.objects.states).features)
@@ -501,24 +580,88 @@ function makeMap2(svgId) {
                  //$(this).attr("fill-opacity", "0.6");
                  //$(this).attr("transform", "scaleZ(0.3)");
                  if (stateName == undefined) return;
-                  console.log(d,i);
+                  //console.log(d,i);
                   d3.select(this).style("fill-opacity", 0.6);
                   tip.show(d);
 
                })
                .on("mouseout", function(d,i) {
-                  console.log(d,i);
+                  //console.log(d,i);
                   d3.select(this).style("fill-opacity", 1.0);
                   d3.select(this).style("zoom", 1);
                   tip.hide(d);
                })
                .on("click", function(d,i) {
-                  var stateName = id_name_map[d.id];
-                  console.log("You clicked on ", stateName);
+                 var stateName = id_name_map[d.id];
+                 var stateCode = id_code_map[d.id];
+                 var centroid = path.centroid(d);
+                 //console.log("[MakeMap2] You clicked on ", stateName,stateCode);
+                 var xPosition = d3.mouse(this)[0] - 5;
+                 var yPosition = d3.mouse(this)[1] - 5;
+                 //console.log(xPosition,yPosition,centroid);
+                 statetip2.attr("transform", "translate(" + d.x +  "," + d.y + ")")
+                         .attr("x", centroid[0])
+                         .attr("y", centroid[1])
+                         .attr("text-anchor", "middle")
+                         .attr("font-weight", "1.4em")
+                         .text(stateCode);
+                switch(d.id) {
+                  case 1:
+                  case 5:
+                  case 21:
+                  case 22:
+                  case 26:
+                  case 28:
+                  case 40:
+                  case 47:
+                  case 54:
+                      //console.log("Is it ", d.id);
+                      $('.statetip2').css({ fill: "white" });
+                      break;
+                  case 10:
+                  case 13:
+                  case 17:
+                  case 18:
+                  case 19:
+                  case 20:
+                  case 24:
+                  case 29:
+                  case 32:
+                  case 34:
+                  case 36:
+                  case 37:
+                  case 42:
+                  case 45:
+                  case 48:
+                  case 51:
+                  case 55:
+                  case 56:
+                      //console.log("Is it ", d.id);
+                      $('.statetip2').css({ fill: "black" });
+                      break;
+                  default:
+                      //console.log("Is it ", d.id);
+                      $('.statetip2').css({ fill: "#212121" });
+                      break;
+                }
+
                   makeBar2(".chart2", stateName);
-                  makeBar(".chart1", stateName);
+                  //makeBar(".chart1", stateName);
                })
-               .attr("d", path);
+               .attr("d", path)
+               .exit()
+               .remove()
+               .selectAll(".statetip2")
+               .style("display","none");
+
+
+            statetip2 = svg.append("text")
+                              .attr("class", "statetip2")
+                              .style("display", "inline")
+                              .attr("x", 62.50196478975809)
+                              .attr("y", 142.86361231212803)
+                              .text("CA")
+                              .style("fill","darkblue" );
 
              svg.append("path")
                  .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
@@ -526,48 +669,38 @@ function makeMap2(svgId) {
                  .attr("d", path);
            });
 
-      function zoommap(d) {
-        console.log("Zoom map");
+}
 
-        if (active.node() === this) return reset();
-        //active.classed("active", false);
-        active = d3.select(this).classed("active", true);
+function diseaseMapLegend() {
+  var linear = d3.scaleLinear()
+  .domain([8.4,13,22])
+  .range([GREEN,YELLOW,RED]);
 
-        var bounds = path.bounds(d),
-            dx = bounds[1][0] - bounds[0][0],
-            dy = bounds[1][1] - bounds[0][1],
-            x = (bounds[0][0] + bounds[1][0]) / 2,
-            y = (bounds[0][1] + bounds[1][1]) / 2,
-            scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
-            translate = [width / 2 - scale * x, height / 2 - scale * y];
+  var quantize = d3.scaleQuantize()
+          .domain([220,460])
+          .range([GREEN,YELLOW,RED]);
 
-        svg.transition()
-            .duration(750)
-            // .call(zoom.translate(translate).scale(scale).event); // not in d3 v4
-            .call( zoom.transform, d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale) ); // updated for d3 v4
-      }
 
-      function reset() {
-        active.classed("active", false);
-        active = d3.select(null);
-        svg.transition()
-            .duration(750)
-            // .call( zoom.transform, d3.zoomIdentity.translate(0, 0).scale(1) ); // not in d3 v4
-            .call( zoom.transform, d3.zoomIdentity ); // updated for d3 v4
-      }
+  var svg = d3.select(".map2-legend");
 
-      function zoomed() {
-        svg.append("g").style("stroke-width", 1.5 / d3.event.transform.k + "px");
-        // g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")"); // not in d3 v4
-        svg.append("g").attr("transform", d3.event.transform); // updated for d3 v4
-      }
+  svg.append("g")
+    .attr("class", "legendLinear")
+    .attr("x", 10)
+    .attr("y", 50)
+    .attr("width", "500")
+    .attr("text-anchor", "right")
+    .attr("transform", "translate(80,20)");
 
-      // If the drag behavior prevents the default click,
-      // also stop propagation so we don’t click-to-zoom.
-      function stopped() {
-        if (d3.event.defaultPrevented) d3.event.stopPropagation();
-      }
+  var legendLinear = d3.legendColor()
+    .shapeWidth(20)
+    .cells(3)
+    .shapePadding(5)
+    .titleWidth(100)
+    .orient('vertical')
+    .scale(quantize);
 
+  svg.select(".legendLinear")
+    .call(legendLinear);
 }
 
 //////////////// create bar chart of heart disease data ////////////////
@@ -587,7 +720,7 @@ function populate_state_level_data(stateName) {
     // save the values in the order listed in data2
     var indata = clean_hd_data;
 
-    console.log(indata.length);
+    //console.log(indata.length);
 
     for (var i = 0; i < indata.length; i++) {
       // check for statename match
@@ -633,7 +766,7 @@ function populate_state_level_data(stateName) {
 }
 
 function makeBar2(svgId, stateName,incomingdata) {
-  console.log("You clicked on ", stateName);
+  //console.log("You clicked on ", stateName);
   var data = populate_state_level_data(stateName);
 
 
@@ -672,7 +805,10 @@ function makeBar2(svgId, stateName,incomingdata) {
 
    var y = d3.scaleBand().range([height,0]).padding(0.1);
    //var yScale = d3.scaleOrdinal([0, height]);
-   y.domain(data.map(function(d,i) {console.log(d,i,hgLegends[i]); return hgLegends[i]; }));
+   y.domain(data.map(function(d,i) {
+     //console.log(d,i,hgLegends[i]);
+     return hgLegends[i];
+   }));
 
       // process state specific data and store it in a safe variable
       var keys = hgLegends;
@@ -781,6 +917,7 @@ var processDiseaseData = function(err,data) {
   // not ideal but doable
   clean_hd_data = data;
   makeMap2("#map2-svg", MAP2_TITLE);
+  diseaseMapLegend();
   makeBar2(".chart2", "California");
 
 }

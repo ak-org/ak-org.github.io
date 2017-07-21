@@ -222,3 +222,45 @@ button.accordion.active:after {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+
+div.bar2tooltip {
+    position: absolute;
+    text-align: center;
+    width: 200px;
+    height: 48px;
+    padding: 2px;
+    margin-bottom: 10px;
+    font-size:  14px;
+    background: darkslategray;
+    color: white;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+    top: 200px;
+    left:50px;
+}
+
+div.bar2tooltip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 12px;
+  width: 100%;
+  line-height: 1;
+  color: darkslategray;
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+  top: 47px;
+  left:0px;
+}
+
+
+.d3-tip {
+  line-height: 1;
+  padding: 14px;
+  background: darkslategray;
+  border-radius: 8px;
+  color: #fff;
+  top: 47px;
+  left:0px;
+}

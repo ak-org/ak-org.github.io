@@ -1,0 +1,14 @@
+runtime: python27
+application: cs498-174208
+api_version: 1
+threadsafe: true
+version: 1
+
+handlers:
+- url: /
+  static_files: www/stem.html
+  upload: www/stem.html
+
+- url: /(.*)
+  static_files: www/\1
+  upload: www/(.*)

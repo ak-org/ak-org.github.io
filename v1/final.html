@@ -44,10 +44,10 @@
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="stem.html">Home</a></li>
+          <li ><a href="stem.html">Home</a></li>
           <li ><a href="second.html">Scene2</a></li>
           <li ><a href="jumpoff.html">Scene3</a></li>
-          <li ><a href="final.html">Final</a></li>
+          <li class="active"><a href="final.html">Final</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -66,12 +66,19 @@
       <div class="col-lg-6">
         <h4 class="text-center">Poverty Level</h4>
         <h5 class="text-center">(Excluding US Territories)</h5>
-        <div id="map1-svg"></div>
+        <div id="map1-svg">
+        </div>
+        <svg class="map1-legend">
+
+        </svg>
       </div>
       <div class="col-lg-6">
         <h4 class="text-center">Heart Disease Mortality </h4>
         <h5 class="text-center">(Adults 35 years or older)</h5>
         <div id="map2-svg"></div>
+        <svg class="map2-legend" >
+
+        </svg>
       </div>
     </div>
     <div class="container">
@@ -82,7 +89,7 @@
         <div class="container">
           <div class="col-lg-2">
               <svg class="svgBar" width="300" height="360">
-                  </svg>
+              </svg>
           </div>
 
           <div class="col-lg-4">
@@ -116,30 +123,36 @@
       <button class="accordion">About the Visualization, Final Chapter</button>
          <div class="panel" >
            <p class="lead" >The project is following the <strong>Martini Glass</strong> narrative visualization structure.
-           This page represents the final chapter of this visualization structure. The users is ready to explore reader driven contents
-           and draw own conclusions.
+           This page represents the final chapter of this visualization structure. The user is ready to explore reader driven contents
+           and draw conclusions independently.
            </p>
            <h3>User Interface Events</h3>
            <p class="lead" >The buttons in the navigation bar and the Prev, Next button
               at the bottom of this page enable the User Interface events.
               User interacts by clicking on the button or menu items to navigate to various part of this story.
            </p>
-           <p class="lead" >User is presented with helpful hints as the part of page load event. The alert can be closed by clicking on X
-              or it will automatically disappear after six seconds, allowing enough time for user to read the information.
+           <p class="lead" >User is presented with helpful hint as the part of page load event. The alert can be closed by clicking on X
+              or it will disappear after six seconds, allowing enough time for user to read the information.
            </p>
            <p class="lead" >The mouse hover event on the either map shows the tooltip containing additional informaton about that specific page.
            </p>
            <p class="lead" >The mouse click event on the either map causes the bar chart in the bottom half to automatically refresh and show data for the state clicked in the map.
            </p>
            <h3>Annotations</h3>
-             <p class="lead" >Both maps uses tool tips and title for annotation. The bar charts uses legend and numerical value in the individual map for annotation.</p>
+             <p class="lead" >Tool tips are used as annotation in both maps. By default, the bar charts for California are drawn on page load.
+                              When user picks a different state, the name of selected state is annotated in the map to reflect the current selection.
+                              User is able to visually track their choice while they explore the maps and charts.
+                              The bar charts uses numerical values in the individual bar for annotation.</p>
            <h3>Triggers</h3>
-           <p class="lead" >The mouse click and mouse hover events are the triggers for this page.
+           <p class="lead" >The mouse click and mouse hover events are the triggers for this page. The mouse click trigger causes map to show label of the selected state.
+                            The label of previously selected state is removed and label of newly selected state is displayed.
            </p>
            <h3>Parameters</h3>
            <p class="lead" >The backend d3 javascript for the map passes the state information and the div information to the javascript function rendering the bar charts.
-             On page load, the bar chart show the data of California. If user clicks on a state in map, it receives divID, and state id as input paramter and refreshes bar
-             chart with the data for the requested state.
+             On page load, the bar chart show the data of California. If a user clicks on a state in map, javascript function receives divID, and state id as input paramter and refreshes bar
+             chart with the data for the requested state. The state name and state code are passed to the javascript function to correctly label the selected state. The state code is also
+             passed as in input parameter to the javascript function to pick appropriate text colors.
+             For example, black text is displayed on yellow background and white text is displayed on the red background.
            <p class="lead" >This section is hyper linked to the previous and home section. The name of the target section is passed
                             as an input paramter to the buttons and navgiation bar items.
 
