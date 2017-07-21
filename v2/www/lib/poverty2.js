@@ -143,7 +143,7 @@ function stopped() {
 
 //////////////// read us state names /////////////////
 
-d3.tsv("/data/us-state-names.tsv", function(error, names) {
+d3.tsv("data/us-state-names.tsv", function(error, names) {
 for (var i = 0; i < names.length; i++) {
   name_id_map[names[i].name] = names[i].id;
   id_name_map[names[i].id] = names[i].name;
@@ -203,7 +203,7 @@ function makeMap(svgId) {
 
 
 
-   d3.json("../data/us.json", function(error, us) {
+   d3.json("data/us.json", function(error, us) {
              if (error) throw error;
 
 
@@ -702,21 +702,23 @@ function povertyMapLegend() {
 
 
   var svg = d3.select(".map1-legend");
-
+  svg.attr("width","600")
+  svg.attr("height","50")
+  
   svg.append("g")
     .attr("class", "legendLinear")
     .attr("x", 10)
     .attr("y", 50)
     .attr("width", "500")
     .attr("text-anchor", "right")
-    .attr("transform", "translate(80,20)");
+    .attr("transform", "translate(80,0)");
 
   var legendLinear = d3.legendColor()
     .shapeWidth(20)
     .cells(3)
-    .shapePadding(5)
+    .shapePadding(65)
     .titleWidth(100)
-    .orient('vertical')
+    .orient('horizontal')
     .scale(quantize);
 
   svg.select(".legendLinear")
@@ -786,7 +788,7 @@ function makeMap2(svgId) {
 
    var active = d3.select(null);
 
-   d3.json("../data/us.json", function(error, us) {
+   d3.json("data/us.json", function(error, us) {
              if (error) throw error;
 
                svg.append("g").attr("class", "states")
@@ -925,6 +927,8 @@ function diseaseMapLegend() {
 
 
   var svg = d3.select(".map2-legend");
+  svg.attr("width","600")
+  svg.attr("height","50")
 
   svg.append("g")
     .attr("class", "legendLinear")
@@ -933,14 +937,14 @@ function diseaseMapLegend() {
     .attr("height", "80")
     .attr("width", "800")
     .attr("text-anchor", "right")
-    .attr("transform", "translate(80,20)");
+    .attr("transform", "translate(80,0)");
 
   var legendLinear = d3.legendColor()
     .shapeWidth(20)
     .cells(3)
-    .shapePadding(5)
+    .shapePadding(85)
     .titleWidth(5)
-    .orient('vertical')
+    .orient('horizontal')
     .scale(quantize);
 
   svg.select(".legendLinear")
@@ -1454,9 +1458,9 @@ var processDiseaseData = function(err,data) {
 
 }
 
-d3.csv("/data/PovertyEstimates.csv", processPovertyData);
+d3.csv("data/PovertyEstimates.csv", processPovertyData);
 
-d3.csv("/data/clean_heart_disease.csv", processDiseaseData);
+d3.csv("data/clean_heart_disease.csv", processDiseaseData);
 
 
 var acc = document.getElementsByClassName("accordion");

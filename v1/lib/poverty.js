@@ -143,7 +143,7 @@ function stopped() {
 
 //////////////// read us state names /////////////////
 
-d3.tsv("/data/us-state-names.tsv", function(error, names) {
+d3.tsv("data/us-state-names.tsv", function(error, names) {
 for (var i = 0; i < names.length; i++) {
   name_id_map[names[i].name] = names[i].id;
   id_name_map[names[i].id] = names[i].name;
@@ -466,14 +466,14 @@ function povertyMapLegend() {
     .attr("y", 50)
     .attr("width", "500")
     .attr("text-anchor", "right")
-    .attr("transform", "translate(80,20)");
+    .attr("transform", "translate(80,0)");
 
   var legendLinear = d3.legendColor()
-    .shapeWidth(20)
+    .shapeWidth(40)
     .cells(3)
-    .shapePadding(5)
+    .shapePadding(55)
     .titleWidth(100)
-    .orient('vertical')
+    .orient('horizontal')
     .scale(quantize);
 
   svg.select(".legendLinear")
@@ -685,18 +685,19 @@ function diseaseMapLegend() {
 
   svg.append("g")
     .attr("class", "legendLinear")
-    .attr("x", 10)
-    .attr("y", 50)
+    .attr("x", 20)
+    .attr("y", 120)
     .attr("width", "500")
-    .attr("text-anchor", "right")
-    .attr("transform", "translate(80,20)");
+    .attr("height", "20")
+    .attr("text-anchor", "center")
+    .attr("transform", "translate(80,0)");
 
   var legendLinear = d3.legendColor()
-    .shapeWidth(20)
+    .shapeWidth(40)
     .cells(3)
-    .shapePadding(5)
+    .shapePadding(75)
     .titleWidth(100)
-    .orient('vertical')
+    .orient('horizontal')
     .scale(quantize);
 
   svg.select(".legendLinear")
@@ -922,9 +923,9 @@ var processDiseaseData = function(err,data) {
 
 }
 
-d3.csv("/data/PovertyEstimates.csv", processPovertyData);
+d3.csv("data/PovertyEstimates.csv", processPovertyData);
 
-d3.csv("/data/clean_heart_disease.csv", processDiseaseData);
+d3.csv("data/clean_heart_disease.csv", processDiseaseData);
 
 
 
