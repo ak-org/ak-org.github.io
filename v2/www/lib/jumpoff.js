@@ -144,7 +144,7 @@ var heartDiseaseOverallSpec2 = {
           {"State": "NJ", "StateName": "New Jersey", "Heart Disease Mortality Rate ": 262.4},
           {"State": "NY", "StateName": "New York", "Heart Disease Mortality Rate ": 291},
           {"State": "NC", "StateName": "North Carolina", "Heart Disease Mortality Rate ": 248.6},
-          {"State": "ND", "StateName": "North Dakota", "Heart Disease Mortality Rate ": 361.2},
+          {"State": "ND", "StateName": "North Dakota", "Heart Disease Mortality Rate ": 231.6},
           {"State": "OH", "StateName": "Ohio", "Heart Disease Mortality Rate ": 291},
           {"State": "OK", "StateName": "Oklahoma", "Heart Disease Mortality Rate ": 355.7},
           {"State": "OR", "StateName": "Oregon", "Heart Disease Mortality Rate ": 199.2},
