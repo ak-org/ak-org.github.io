@@ -103,14 +103,15 @@
                       Mouse hover events in the bar charts show additonal data details.
                    </p>
                    <h3>Annotations</h3>
-                     <p class="lead" >The tooltips in both charts represent the annotations.
+                     <p class="lead" >Both charts are annotated via tooltips. These tooltips are visible when user hovers the mouse over these charts.
                     </p>
                    <h3>Triggers</h3>
-                   <p class="lead" >The mouse click acts as a trigger event.
+                   <p class="lead" >The mouse click acts as a trigger event. The mouse hover acts a trigger event for tooltips in both charts.
                    </p>
                    <h3>Parameters</h3>
                    <p class="lead" >This section is hyper linked to the previous and next section. The name of the target section is passed
-                                    as an iput paramter to the buttons and navgiation bar items.
+                                    as an input paramter to the buttons and navgiation bar items. The data is passed as a JSON object to
+                                    Vega-lite javascript object for rendering axis and bars in the charts.
 
                  </div>
               </div><!-- /.container -->
@@ -134,7 +135,7 @@
 
          </div>
 
-
+     </div>
       <footer class="footer   text-center">
         <div class="container">
           <p class="text-muted"></p>
