@@ -17,6 +17,7 @@
           crossorigin="anonymous">
     <link href="css/starter-template.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vega-tooltip/0.4.2/vega-tooltip.css" rel="stylesheet">
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -28,6 +29,9 @@
   </head>
 
   <body>
+
+    <!-- Placeholder for the tooltip -->
+    <div id="vis-tooltip" class="vg-tooltip"></div>
 
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -60,16 +64,29 @@
             <h1>Poverty and Heart disease mortality rate in United States</h1>
           </div>
           <p class="lead"></p>
-          <p class="lead text-center">
+          <p class="lead">
             According to <a href="https://www.healthpovertyaction.org/info-and-resources/the-cycle-of-poverty-and-poor-health/key-facts/">
             this article </a> poverty is both a cause and consequence of poor health.
                          </p>
-         <p class="lead  text-center">
-             Is there a relationship between the poverty and heart disease mortality rate? Do other factors such as location or weather
-             contribute to the high mortaility rate?
-            </p>
 
+        <p class="lead">
+          Following charts shows mortality rate amongst men and women in USA. The mortality rate is per 100,000 Adults.
+           Men carries higher risk in majority of the states in USA.
+           These corraborate the fact women carries less risk of heart disease, but the variation implies that there are potentially other factors
+           influencing the mortality rate among women.
+        </p>
 
+            <div class="container">
+                  <div class="jumpoffchart" id="jumpoffchart">
+                  </div>
+                  <div class="jumpoffchart2" id="jumpoffchart2">
+                  </div>
+            </div>
+            <p class="lead">
+                Is there a relationship between the poverty and heart disease mortality rate?
+                Do non-economic factors such as race, ethnicity, location or weather
+                contribute to the high mortality rate?
+               </p>
             <div class="container" id="aboutVisualization" style="padding-bottom: 30px;">
               <button class="accordion">About the Visualization, Third Chapter</button>
                  <div class="panel" >
@@ -134,13 +151,19 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
           integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
           crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+
+
+  <script src="//d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/topojson.v2.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.1.0/topojson.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega/3.0.0-beta.38/vega.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-lite/2.0.0-beta.6/vega-lite.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-beta.19/vega-embed.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-tooltip/0.4.2/vega-tooltip.min.js"></script>
-  <script src="lib/second.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-beta.14/vega-embed.min.js"></script>
+
+  <script src="lib/jumpoff.js"></script>
 
 </body>
 </html>
