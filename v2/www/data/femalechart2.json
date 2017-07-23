@@ -122,10 +122,11 @@
           "y2": {"scale": "yscale", "value": 0}
         },
         "update": {
-          "fill": {"value": "peru"}
+          "fill": {"value": "indianred"},
+          "fillOpacity": {"value": 1}
         },
         "hover": {
-          "fill": {"value": "red"}
+          "fillOpacity": {"value": 0.6}
         }
       }
     },
