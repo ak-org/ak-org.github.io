@@ -99,7 +99,8 @@
                    <p class="lead" >The project follows the <strong>Martini Glass</strong> narrative visualization structure.
                    This page represents the "jumping off point" of the visualization structure. The user has experienced
                    author driven contents and is now ready for the reader driven content.
-                   The next and Final page contains reader driven content and it allows users to interact with data and draw their own conclusions.
+                   Prev page allows users to navigate back to previous scene.
+                   The next page takes uers to the final scence containing reader driven content. Final scene will allow users to interact with data and draw their own conclusions.
                    </p>
                    <h3>User Interface Events</h3>
                    <p class="lead" >The buttons in the navigation bar at top and the Prev, Next button
@@ -108,16 +109,29 @@
                       Mouse hover events in the bar charts show additonal data details.
                    </p>
                    <h3>Annotations</h3>
-                     <p class="lead" >Both charts are annotated via tooltips. These tooltips are visible when user hovers the mouse over these charts.
+                     <p class="lead" >Both charts are annotated via tooltips. These tooltips are visible when user hovers mouse over these charts.
+
                     </p>
                    <h3>Triggers</h3>
                    <p class="lead" >The mouse click acts as a trigger event. The mouse hover acts a trigger event for tooltips in both charts.
+                     The mouse over event triggers a opacity change in the closest bar to the mouse position.
+                     As mouse moves from one bar to another, changes in X and Y position causes opacity to
+                     revert back to its original state in the previous bar and change in the new bar.
+                     Position of mouse along x and y axis is used to evaluate user position on the bar charts. The position is used to properly position the tooltip and change opacity.
+
+
+
                    </p>
                    <h3>Parameters</h3>
                    <p class="lead" >This section is hyper linked to the previous and next section. The name of the target section is passed
                                     as an input paramter to the buttons and navgiation bar items. The data is passed as a JSON object to
                                     Vega API function for rendering axis,bars and tooltips for both charts.
 
+                  <p class="lead">Both chrats are built using the Vega library. Vega is a declarative language and entire chart is defined as a JSON object.
+                    The data for each chart is passed as a JSON object to
+                    a Vega Javascript function for rendering axis,bars and tooltips for the chart. The JSON objects are stored seperately in the <strong>malechart2.json and femalechart2.json</strong>
+                    files under data folder.
+                  </p>
                  </div>
               </div><!-- /.container -->
 

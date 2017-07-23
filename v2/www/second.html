@@ -97,26 +97,34 @@
                            <button class="accordion">About the Visualization, Second Chapter</button>
                               <div class="panel" >
                                 <p class="lead" >Just a reminder that the visualization project is following the <strong>Martini Glass</strong> narrative visualization structure.
-                                This page represents the stem of the visualization structure. The user is still consuming author driven
+                                This page represents the stem of the visualization structure. The user is still exploring author driven
                                 contents. The next button at the bottom of the page ( or Scene3 link in the navigation bar) will take user to the "jumping off point".
                                 Final page contains reader driven content and it allows users to interact with data and draw their own conclusions.
                                 </p>
-                                <p class="lead">The chart was built using Vega-lite.</p>
                                 <h3>User Interface Events</h3>
                                 <p class="lead" >The navigation buttons at the top and the Next button
                                    at the bottom of this page represent the User Interface events.
                                    User interacts by clicking on the button or menu items to navigate to various part of this visualzation story.
+                                   The hover event allows proper positioning of the tooltip.
                                 </p>
                                 <h3>Annotations</h3>
                                   <p class="lead" >The annotation is represented by the legend on the top-right of the chart and a tooltip when mouse is hovered over the bars in the chart.</p>
                                 <h3>Triggers</h3>
                                 <p class="lead" >The mouse click event acts as a trigger to faciliate back and forward navigation in this visualization presentation.
                                                                    The mouse hover (mouseover) event is a trigger for the tooltip in the bar chart.
+                                                                   The mouse over event triggers a opacity change in the closest bar to the mouse position.
+                                                                   As mouse moves from one bar to another, changes in X and Y position causes opacity to
+                                                                   revert back to its original state in the previous bar and change in the new bar. 
                                 </p>
                                 <h3>Parameters</h3>
                                 <p class="lead" >This section is hyper linked to the previous and next section. The name of the target section is passed
                                                  as an input paramter to the buttons and navgiation bar items. The data is passed as a JSON object to
-                                                 Vega API function for rendering axis,bars and tooltips for the chart.
+                                                 Vega API function for rendering axis,bars and tooltips for the chart.</p>
+                               <p class="lead">The chart is built using the Vega library. Vega is a declarative language and entire chart is defined as a JSON object.
+                                 The data for the chart is passed as a JSON object to
+                                 Vega API function for rendering axis,bars and tooltips for the chart. The JSON object is stored seperately in the <strong>overallchart.json</strong>
+                                 file under data folder.
+                               </p>
 
                               </div>
 

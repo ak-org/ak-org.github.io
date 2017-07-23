@@ -58,8 +58,8 @@
     <div class="alert alert-success" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <strong></strong> Explore the maps with your mouse. Click on a state to learn more about that state.</br>
-        If the page doesn't render properly on first load, please refresh. 
+        <strong></strong> Explore the maps and charts by moving mouse over them. Click on a state to learn more about that state.</br>
+        If the page doesn't render properly on first load, please refresh.
     </div>
     <div class="page-header" style="display:none">
       <h3>Poverty and Heart disease mortality rate in United States</h3>
@@ -114,15 +114,22 @@
       <button class="accordion">About the Visualization, Final Chapter</button>
          <div class="panel" >
            <p class="lead" >The project is following the <strong>Martini Glass</strong> narrative visualization structure.
-           This page represents the final chapter of this visualization structure. The user is ready to explore reader driven contents
-           and draw conclusions independently.
+           This is the final scene of this visualization story. The user is ready to explore reader driven contents
+           and draw conclusions independently. User is presented with color code maps to represent poverty and heart disease data.
+           In the bottom half, a state specific data is show as a bar chart. By default, bar charts show the information about
+           the state of California.
            </p>
+           <p class="lead"> All charts and maps are built using D3.js Version 4 library. Unlikely previous scenes, the html5 elements
+                            are added and manipulated using javascript.</p>
            <h3>User Interface Events</h3>
            <p class="lead" >The buttons in the navigation bar and the Prev, Next button
               at the bottom of this page enable the User Interface events.
               User interacts by clicking on the button or menu items to navigate to various part of this story.
+              Mouse hover events in the bar charts show additonal data details.
+              Mouse click allows user to select a specific state in either of the two maps.
+
            </p>
-           <p class="lead" >User is presented with helpful hint as the part of page load event. The alert can be closed by clicking on X
+           <p class="lead" >User is presented with helpful hints as the part of page load event. The alert can be closed by clicking on X
               or it will disappear after six seconds, allowing enough time for user to read the information.
            </p>
            <p class="lead" >The mouse hover event on the either map shows the tooltip containing additional informaton about that specific page.
@@ -133,14 +140,21 @@
              <p class="lead" >Tool tips are used as annotation in both map and bar charts.
                               By default, the bar charts for California are drawn on page load.
                               When user picks a different state, the name of selected state is annotated in the map to reflect the current selection.</p>
+
             <p class="lead" >
-                              User is able to visually track their choice while they explore the maps and charts.
-                              The bar charts leverages tooltip for annotation.The poverty rate and mortality rate are show on top of bar chart in the bottom half of the screen. The numbers and the bar height
+                              
+                              When user selects a state, its name is highlighted on the map allowing user to focus on data and
+                              not worry about remembering click details.
+                              The bar charts and maps leverages tooltip for annotation.The poverty rate and mortality rate are show on top of bar chart in the bottom half of the screen.
+                              The numbers and the bar height
                               transition dynamically as user moves from one state to another.</p>
            <h3>Triggers</h3>
            <p class="lead" >The mouse click and mouse hover events are the triggers for this page. The mouse click trigger causes map to show label of the selected state.
                             The label of previously selected state is removed and label of newly selected state is displayed.
+                            Position of mouse along x and y axis is used to evaluate user position on the map/bar charts and it is used to properly position the tooltip.
                             The mouse click on navigation buttons at top or bottom of the page faciliate back and forth navigation.
+                            The mouse hover event triggers rendering of the tooltip.
+                            The x and y position is also used as a trigger to change opacity of the selected state in the map.
            </p>
            <h3>Parameters</h3>
            <p class="lead" >The geopath data is loaded as a json object and used by d3 to render US maps. The data is quantified into three bins to show states with low, medium or high poverty/mortality rate.
