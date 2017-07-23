@@ -75,8 +75,8 @@
           Following charts shows mortality rate amongst men and women in USA. The mortality rate is per 100,000 Adults.
            Men carries higher risk in majority of the states in USA.
            These charts corraborate the fact women in general carry less risk of heart disease as compared to men. The variance in women's chart
-           implies that there are potentially other factors
-           influencing the mortality rate among women.
+           implies that there are potentially other factors influencing the mortality rate among women. Please note that both charts
+           are drawn to same scale along the Y-axis.
         </p>
 
             <div class="container">
@@ -85,11 +85,14 @@
                   <div class="jumpoffchart2" id="jumpoffchart2">
                   </div>
             </div>
-            <p class="lead">
-                Is there a relationship between the poverty and heart disease mortality rate?
-                Do non-economic factors such as race, ethnicity, location or weather
-                contribute to the high mortality rate?
-               </p>
+            <div class="container">
+              <p class="lead">
+                  Is there a relationship between the poverty and heart disease mortality rate?
+                  Do non-economic factors such as race, ethnicity, location or weather
+                  contribute to higher mortality rate?
+                 </p>
+            </div>
+
             <div class="container" id="aboutVisualization" style="padding-bottom: 30px;">
               <button class="accordion">About the Visualization, Third Chapter</button>
                  <div class="panel" >
@@ -113,7 +116,7 @@
                    <h3>Parameters</h3>
                    <p class="lead" >This section is hyper linked to the previous and next section. The name of the target section is passed
                                     as an input paramter to the buttons and navgiation bar items. The data is passed as a JSON object to
-                                    Vega-lite javascript object for rendering axis and bars in the charts.
+                                    Vega API function for rendering axis,bars and tooltips for both charts.
 
                  </div>
               </div><!-- /.container -->
@@ -172,7 +175,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-beta.17/vega-embed.js"></script>
   <script src="//vega.github.io/vega-editor/vendor/vega-embed.js" charset="utf-8"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-tooltip/0.3.3/vega-tooltip.min.js"></script>
-  
+
   <script src="lib/barchart2.js"></script>
 
 </body>

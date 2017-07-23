@@ -12,9 +12,10 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vega-tooltip/0.4.2/vega-tooltip.css" rel="stylesheet">
     <link href="css/starter-template.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/vega-tooltip/0.4.2/vega-tooltip.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -83,32 +84,50 @@
 
            </div>
         <!-- </div> -->
+        <div class="container">
+          <p class="lead">
+             A cursory look at the chart shows that northern and western states have lower poverty as compared to southern states. Population
+             seems to a major but there are anamolies. Both Wyoming and Montana are low population states and geographically close to each other. Yet,
+             Montana has higher poverty rate than Wyoming.
+          </p>
+
+        </div>
 
          <div class="container" id="aboutVisualization" style="padding-bottom: 30px;">
            <button class="accordion">About the Visualization, Home Page</button>
               <div class="panel" >
+                <h3>Visualization Narrative</h3>
                 <p class="lead" >The project follows the <strong>Martini Glass</strong> narrative visualization structure.
                 The <strong>Home page</strong>  represents the base of the visualization structure. The user is being exposed
                 to the author driven content and will be led through two additional scenes representing stem. The Scene3
                 page is the "jumping off point" and leads user to the final page.
                 Final page contains reader driven content and it allows users to draw their own conclusions.
                 </p>
-                <p class="lead">The chart was built using Vega-lite.</p>
-                <h3>User Interface Events</h3>
-                <p class="lead" >The buttons in the navigation bar and the Prev, Next button
+               <h3>User Interface Events</h3>
+                <p class="lead" >The menu items in the navigation bar and the Prev, Next button
                    at the bottom of this page enable the User Interface events.
                    User interacts by clicking on the button or menu items to navigate to various part of this story.
+
                 </p>
                 <h3>Annotations</h3>
-                  <p class="lead" >The annotation is represented by the legend on the top-right of the chart and a tooltip when mouse is hovered over the bars in the chart.</p>
+                  <p class="lead" >The annotation is represented by the legend on the top-right of the chart and a tooltip when mouse is hovered over different bars in the chart.</p>
                 <h3>Triggers</h3>
                 <p class="lead" >The mouse click acts as a trigger event for navigation.
                   The mouse hover (mouseover) event is a trigger for the tooltip in the bar chart.
+                  The highlighted items in the navigation bar and colored buttons with
+                  icons provide visual clues about the user actions triggers to the user.
                 </p>
                 <h3>Parameters</h3>
                 <p class="lead" >This section is hyper linked to the next section. The name of the target section is passed
-                                 as an input paramter to the button and navgiation bar items. The data is passed as a JSON object to
-                                 Vega-lite javascript object for rendering axis and bars in the charts.
+                                 as an input paramter to the buttons and items in the navigation bar.
+                </p>
+
+                <p class="lead">The chart is built using the Vega library. Vega is a declarative language and entire chart is defined as a JSON object.
+                  The data for the chart is passed as a JSON object to
+                  Vega API function for rendering axis,bars and tooltips for the chart. The JSON object is stored seperately in the <strong>overallpoverty.json</strong>
+                  file under data folder.
+                </p>
+
 
               </div>
 

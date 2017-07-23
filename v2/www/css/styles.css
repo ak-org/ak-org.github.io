@@ -21,8 +21,8 @@
 }
 
 .chart2 {
-  margin-top:60px;
-  margin-bottom:50px;
+  margin-top:20px;
+  margin-bottom:40px;
 
 }
 .chart2 div {
@@ -38,8 +38,8 @@
 
 }
 .chart1 {
-  margin-top:60px;
-  margin-bottom:50px;
+  margin-top:20px;
+  margin-bottom:40px;
 
 }
 .chart1 div {
@@ -267,4 +267,7 @@ div.bar2tooltip:after {
 
 bar:hover {
     opacity: 0.5;
+}
+p.lead {
+  font-size:16px;
 }
