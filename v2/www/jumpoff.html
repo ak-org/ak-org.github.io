@@ -110,11 +110,11 @@
                    </p>
                    <h3>Annotations</h3>
                      <p class="lead" >Both charts are annotated via tooltips. These tooltips are visible when user hovers mouse over these charts.
-
+                                   The legend and labels along the X and Y axis provides additional annotations for the chart.
                     </p>
                    <h3>Triggers</h3>
-                   <p class="lead" >The mouse click acts as a trigger event. The mouse hover acts a trigger event for tooltips in both charts.
-                     The mouse over event triggers a opacity change in the closest bar to the mouse position.
+                   <p class="lead" >The mouse click and mouse hovers results in a trigger event. The mouse hover acts a trigger event for tooltips in both charts.
+                     The mouse hover event triggers a opacity change in the closest bar to the mouse position.
                      As mouse moves from one bar to another, changes in X and Y position causes opacity to
                      revert back to its original state in the previous bar and change in the new bar.
                      Position of mouse along x and y axis is used to evaluate user position on the bar charts. The position is used to properly position the tooltip and change opacity.
@@ -123,11 +123,11 @@
 
                    </p>
                    <h3>Parameters</h3>
-                   <p class="lead" >This section is hyper linked to the previous and next section. The name of the target section is passed
+                   <p class="lead" >This section is hyper linked with the previous and next section. The name of the target section is passed
                                     as an input paramter to the buttons and navgiation bar items. The data is passed as a JSON object to
                                     Vega API function for rendering axis,bars and tooltips for both charts.
 
-                  <p class="lead">Both chrats are built using the Vega library. Vega is a declarative language and entire chart is defined as a JSON object.
+                  <p class="lead">Both charts use the Vega library. Vega is a declarative language and entire chart is defined as a JSON object.
                     The data for each chart is passed as a JSON object to
                     a Vega Javascript function for rendering axis,bars and tooltips for the chart. The JSON objects are stored seperately in the <strong>malechart2.json and femalechart2.json</strong>
                     files under data folder.
