@@ -123,7 +123,7 @@
           "y2": {"scale": "yscale", "value": 0}
         },
         "update": {
-          "fill": {"value": "teal"}
+          "fill": {"value": "mediumseagreen"}
         },
         "hover": {
           "fill": {"value": "red"}

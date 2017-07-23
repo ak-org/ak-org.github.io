@@ -98,7 +98,7 @@
     },
     {
       "name": "yscale",
-      "domain": {"data": "table", "field": "rate"},
+      "domain": [0,600],
       "nice": true,
       "range": "height"
     }
@@ -122,7 +122,7 @@
           "y2": {"scale": "yscale", "value": 0}
         },
         "update": {
-          "fill": {"value": "#FFA000"}
+          "fill": {"value": "peru"}
         },
         "hover": {
           "fill": {"value": "red"}

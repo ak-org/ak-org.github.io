@@ -704,7 +704,7 @@ function povertyMapLegend() {
   var svg = d3.select(".map1-legend");
   svg.attr("width","600")
   svg.attr("height","50")
-  
+
   svg.append("g")
     .attr("class", "legendLinear")
     .attr("x", 10)

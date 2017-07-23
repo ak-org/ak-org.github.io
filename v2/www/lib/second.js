@@ -4,6 +4,13 @@ var RED = "#FF0000",
     GREEN = "#228B22";
 
 
+var opt2 = {
+  mode: "vega",
+  actions: false
+},
+spec = "data/overallchart.json";
+
+
 var heartDiseaseSpec = {
       "$schema": "https://vega.github.io/schema/vega-lite/v2.0.json",
       "description": "A simple bar chart to show poverty rate.",
@@ -64,7 +71,12 @@ var heartDiseaseSpec = {
          ]
        },
        "mark": "bar",
+       "selection": {
+           "paintbrush": {"type": "single", "on": "mouseover"},
+           "nobrush": {"type": "single", "on": "mouseout"}
+       },
        "encoding": {
+
          "x": {
                "field": "State",
                "type": "ordinal",
@@ -83,12 +95,14 @@ var heartDiseaseSpec = {
               "domain": [220,320,460],
               "type" : "threshold",
               "range": [GREEN,GREEN,YELLOW,YELLOW,RED,RED]
-
             },
            "type": "quantitative",
             "legend": {
               "title" : "Mortality Rate per 100K Adults"
-             }
+            }
+          },
+          "opacity": {
+            "value" : 1.0
           }
        },
 
@@ -103,6 +117,8 @@ var heartDiseaseSpec = {
        }
 }
 
+
+
 var opt = {
   "renderer": "canvas",
   "actions": {
@@ -112,13 +128,8 @@ var opt = {
   }
 }
 
-var opt2 = {
-  mode: "vega-lite",
-  actions: false
-};
-
-
-vega.embed('#secondVis', heartDiseaseSpec, opt2, function(error, result) {
+/*
+vega.embed('#secondVis', heartDiseaseSpec, opt2, function(error, result,opt2) {
   // result.view is the Vega View, vlSpec is the original Vega-Lite specification
   var tooltipOption = {
     showAllFields: false,
@@ -141,6 +152,16 @@ vega.embed('#secondVis', heartDiseaseSpec, opt2, function(error, result) {
   });
 
 
+*/
+
+
+
+vega.embed('#secondVis', spec, opt2,function(error, result,opt2) {
+  // result.view is the Vega View
+  vegaTooltip.vega(result.view, opt2);
+});
+/*
+*/
 
 var acc = document.getElementsByClassName("accordion");
 var i;

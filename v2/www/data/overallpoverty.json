@@ -1,0 +1,187 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v3.0.json",
+  "width": 960,
+  "height": 240,
+  "padding": 5,
+  "config": {
+    "title": {
+      "fontSize": 16,
+      "font": "Georgia"
+    },
+    "axisBottom": {
+      "labelFontSize": 10,
+      "titleFont" : "Georgia",
+      "offset": 5
+    },
+    "axisLeft": {
+      "labelFontSize": 10,
+      "titleFont" : "Georgia",
+      "offset": 5
+    },
+    "range" : {
+      "summer": ["#ffffe0", "#ffd59b", "#ffa474", "#f47461", "#db4551", "#b81b34", "#8b0000"]
+    },
+    "linear": {"scheme": "purples"}
+  },
+  "title": "Poverty Rate in USA",
+  "data": [
+    {
+      "name": "table",
+      "values": [
+
+        {"State": "AK", "StateName": "Alaska", "povertyRate": 10.4},
+        {"State": "AL", "StateName": "Alabama", "povertyRate": 18.5},
+        {"State": "AR", "StateName": "Arkansas", "povertyRate": 18.7},
+        {"State": "AZ", "StateName": "Arizona", "povertyRate": 17.4},
+        {"State": "CA", "StateName": "California", "povertyRate": 15.4},
+        {"State": "CO", "StateName": "Colorado", "povertyRate": 11.5},
+        {"State": "CT", "StateName": "Connecticut", "povertyRate": 10.6},
+        {"State": "DE", "StateName": "Delaware", "povertyRate": 12.6},
+        {"State": "FL", "StateName": "Florida", "povertyRate": 15.8},
+        {"State": "GA", "StateName": "Georgia", "povertyRate": 17.2},
+        {"State": "HI", "StateName": "Hawaii", "povertyRate": 10.7},
+        {"State": "IA", "StateName": "Iowa", "povertyRate": 12.1},
+        {"State": "ID", "StateName": "Idaho", "povertyRate": 14.7},
+        {"State": "IL", "StateName": "Illinois", "povertyRate": 13.6},
+        {"State": "IN", "StateName": "Indiana", "povertyRate": 14.4},
+        {"State": "KS", "StateName": "Kansas", "povertyRate": 12.9},
+        {"State": "KY", "StateName": "Kentucky", "povertyRate": 18.3},
+        {"State": "LA", "StateName": "Louisiana", "povertyRate": 19.5},
+        {"State": "MA", "StateName": "Massachusetts", "povertyRate": 11.5},
+        {"State": "MD", "StateName": "Maryland", "povertyRate": 9.9},
+        {"State": "ME", "StateName": "Maine", "povertyRate": 13.5},
+        {"State": "MI", "StateName": "Michigan", "povertyRate": 15.7},
+        {"State": "MN", "StateName": "Minnesota", "povertyRate": 10.2},
+        {"State": "MS", "StateName": "Mississippi", "povertyRate": 22.1},
+        {"State": "MO", "StateName": "Missouri", "povertyRate": 14.8},
+        {"State": "MT", "StateName": "Montana", "povertyRate": 14.4},
+        {"State": "NC", "StateName": "North Carolina", "povertyRate": 16.4},
+        {"State": "ND", "StateName": "North Dakota", "povertyRate": 10.7},
+        {"State": "NE", "StateName": "Nebraska", "povertyRate": 12.2},
+        {"State": "NH", "StateName": "New Hampshire", "povertyRate": 8.4},
+        {"State": "NM", "StateName": "New Mexico", "povertyRate": 19.8},
+        {"State": "NJ", "StateName": "New Jersey", "povertyRate": 10.8},
+        {"State": "NV", "StateName": "Nevada", "povertyRate": 14.9},
+        {"State": "NY", "StateName": "New York", "povertyRate": 15.5},
+        {"State": "OH", "StateName": "Ohio", "povertyRate": 14.8},
+        {"State": "OK", "StateName": "Oklahoma", "povertyRate": 16.0},
+        {"State": "OR", "StateName": "Oregon", "povertyRate": 15.2},
+        {"State": "PA", "StateName": "Pennsylvania", "povertyRate": 13.1},
+        {"State": "RI", "StateName": "Rhode Island", "povertyRate": 14.1},
+        {"State": "SC", "StateName": "South Carolina", "povertyRate": 16.8},
+         {"State": "SD", "StateName": "South Dakota", "povertyRate": 13.5},
+         {"State": "TN", "StateName": "Tennessee", "povertyRate": 16.7},
+         {"State": "TX", "StateName": "Texas", "povertyRate": 15.9},
+         {"State": "UT", "StateName": "Utah", "povertyRate": 11.2},
+         {"State": "VT", "StateName": "Vermont", "povertyRate": 10.4},
+         {"State": "VA", "StateName": "Virginia", "povertyRate": 11.2},
+         {"State": "WA", "StateName": "Washington", "povertyRate": 12.2},
+        {"State": "WI", "StateName": "Wisconsin", "povertyRate": 12.1},
+         {"State": "WV", "StateName": "West Virginia", "povertyRate": 18.0},
+         {"State": "WY", "StateName": "Wyoming", "povertyRate": 10.6}
+      ]
+    }
+  ],
+
+  "signals": [
+    {
+      "name": "tooltip",
+      "value": {},
+      "on": [
+        {"events": "rect:mouseover", "update": "datum"},
+        {"events": "rect:mouseout",  "update": "{}"}
+      ]
+    }
+  ],
+  "scales": [
+      {
+      "name": "mycolor",
+      "type": "quantize",
+      "domain": {"data": "table", "field": "povertyRate"},
+      "range": ["green", "orange", "red"]
+    },
+    {
+      "name": "xscale",
+      "type": "band",
+      "sort": "ascending",
+      "domain": {"data": "table", "field": "State"},
+      "range": "width"
+    },
+    {
+      "name": "yscale",
+      "type": "linear",
+      "domain": [7.5,22.2],
+      "range": "height"
+
+
+    }
+  ],
+
+  "axes": [
+    { "orient": "bottom", "scale": "xscale", "title": "States"},
+    { "orient": "left", "scale": "yscale", "grid":"True",
+      "title": "Poverty Rate (%)"}
+  ],
+
+  "legends": [
+  {
+    "fill": "mycolor",
+    "title": "Poverty Rate",
+    "properties": {
+       "title": {
+         "fontSize": {"value": 14}
+       }
+    },
+    "offset": 20,
+    "encode": {
+      "symbols": {
+        "update": {
+          "fillOpacity": {"value": 2.0},
+          "stroke": {"value": "transparent"}
+        }
+      }
+    }
+  }
+],
+
+  "marks": [
+    {
+      "type": "rect",
+      "from": {"data":"table"},
+      "encode": {
+        "enter": {
+           "fill": {"scale": "mycolor", "field": "povertyRate"}
+        },
+        "update": {
+          "x": {"scale": "xscale", "field": "State", "offset": 1},
+          "width": {"scale": "xscale", "band": 1, "offset": -1},
+          "y": {"scale": "yscale", "field": "povertyRate"},
+          "y2": {"scale": "yscale", "value": 0},
+          "fillOpacity": {"value": 1}
+        },
+        "hover": {
+          "fillOpacity": {"value": 0.5}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "align": {"value": "center"},
+          "baseline": {"value": "bottom"},
+          "fill": {"value": "#333"}
+        },
+        "update": {
+          "x": {"scale": "xscale", "signal": "tooltip.StateName", "band": 0.5},
+          "y": {"scale": "yscale", "signal": "tooltip.povertyRate", "offset": -2},
+          "text": {"signal": "tooltip.amount"},
+          "fillOpacity": [
+            {"test": "datum === tooltip", "value": 0},
+            {"value": 1}
+          ]
+        }
+      }
+    }
+    ]
+}

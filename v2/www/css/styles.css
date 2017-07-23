@@ -264,3 +264,7 @@ div.bar2tooltip:after {
   top: 47px;
   left:0px;
 }
+
+bar:hover {
+    opacity: 0.5;
+}

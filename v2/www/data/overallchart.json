@@ -1,0 +1,187 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v3.0.json",
+  "width": 960,
+  "height": 240,
+  "padding": 5,
+  "config": {
+    "title": {
+      "fontSize": 16,
+      "font": "Georgia"
+    },
+    "axisBottom": {
+      "labelFontSize": 10,
+      "titleFont" : "Georgia",
+      "offset": 5
+    },
+    "axisLeft": {
+      "labelFontSize": 10,
+      "titleFont" : "Georgia",
+      "offset": 5
+    },
+    "range" : {
+      "summer": ["#ffffe0", "#ffd59b", "#ffa474", "#f47461", "#db4551", "#b81b34", "#8b0000"]
+    },
+    "linear": {"scheme": "purples"}
+  },
+  "title": "Overall Mortality Rate",
+  "data": [
+    {
+      "name": "table",
+      "values": [
+
+        {"State": "AK", "StateName": "Alaska", "rate": 269.3},
+        {"State": "AL", "StateName": "Alabama", "rate": 435.3},
+        {"State": "AR", "StateName": "Arkansas", "rate": 418.1},
+        {"State": "AZ", "StateName": "Arizona", "rate": 273.1},
+        {"State": "CA", "StateName": "California", "rate": 289.5},
+        {"State": "CO", "StateName": "Colorado", "rate": 247.7},
+        {"State": "CT", "StateName": "Connecticut", "rate": 290.6},
+        {"State": "DE", "StateName": "Delaware", "rate": 325.9},
+        {"State": "FL", "StateName": "Florida", "rate": 293},
+        {"State": "GA", "StateName": "Georgia", "rate": 345.9},
+        {"State": "HI", "StateName": "Hawaii", "rate": 264.1},
+        {"State": "IA", "StateName": "Iowa", "rate": 321.3},
+        {"State": "ID", "StateName": "Idaho", "rate": 290.1},
+        {"State": "IL", "StateName": "Illinois", "rate": 331.7},
+        {"State": "IN", "StateName": "Indiana", "rate": 359.6},
+        {"State": "KS", "StateName": "Kansas", "rate": 304.6},
+        {"State": "KY", "StateName": "Kentucky", "rate": 394.8},
+        {"State": "LA", "StateName": "Louisiana", "rate": 414.9},
+        {"State": "MA", "StateName": "Massachusetts", "rate": 270.8},
+        {"State": "MD", "StateName": "Maryland", "rate": 331.6},
+        {"State": "ME", "StateName": "Maine", "rate": 288.2},
+        {"State": "MI", "StateName": "Michigan", "rate": 387},
+        {"State": "MN", "StateName": "Minnesota", "rate": 229.6},
+        {"State": "MS", "StateName": "Mississippi", "rate": 450.8},
+        {"State": "MO", "StateName": "Missouri", "rate": 376.2},
+        {"State": "MT", "StateName": "Montana", "rate": 293.3},
+        {"State": "NC", "StateName": "North Carolina", "rate": 316.2},
+        {"State": "ND", "StateName": "North Dakota", "rate": 291.3},
+        {"State": "NE", "StateName": "Nebraska", "rate": 283.2},
+        {"State": "NH", "StateName": "New Hampshire", "rate": 286.9},
+        {"State": "NM", "StateName": "New Mexico", "rate": 282.8},
+        {"State": "NJ", "StateName": "New Jersey", "rate": 328.6},
+        {"State": "NV", "StateName": "Nevada", "rate": 378.5},
+        {"State": "NY", "StateName": "New York", "rate": 356.1},
+        {"State": "OH", "StateName": "Ohio", "rate": 362.9},
+        {"State": "OK", "StateName": "Oklahoma", "rate": 437.8},
+        {"State": "OR", "StateName": "Oregon", "rate": 257.4},
+        {"State": "PA", "StateName": "Pennsylvania", "rate": 344.4},
+        {"State": "RI", "StateName": "Rhode Island", "rate": 317.5},
+        {"State": "SC", "StateName": "South Carolina", "rate": 347.8},
+         {"State": "SD", "StateName": "South Dakota", "rate": 296.6},
+         {"State": "TN", "StateName": "Tennessee", "rate": 395.5},
+         {"State": "TX", "StateName": "Texas", "rate": 330.7},
+         {"State": "UT", "StateName": "Utah", "rate": 286.4},
+         {"State": "VT", "StateName": "Vermont", "rate": 295.5},
+         {"State": "VA", "StateName": "Virginia", "rate": 304.7},
+         {"State": "WA", "StateName": "Washington", "rate": 268.4},
+        {"State": "WI", "StateName": "Wisconsin", "rate": 307.7},
+         {"State": "WV", "StateName": "West Virginia", "rate": 382.7},
+         {"State": "WY", "StateName": "Wyoming", "rate": 311.1}
+      ]
+    }
+  ],
+
+  "signals": [
+    {
+      "name": "tooltip",
+      "value": {},
+      "on": [
+        {"events": "rect:mouseover", "update": "datum"},
+        {"events": "rect:mouseout",  "update": "{}"}
+      ]
+    }
+  ],
+  "scales": [
+      {
+      "name": "mycolor",
+      "type": "quantize",
+      "domain": {"data": "table", "field": "rate"},
+      "range": ["green", "orange", "red"]
+    },
+    {
+      "name": "xscale",
+      "type": "band",
+      "sort": "ascending",
+      "domain": {"data": "table", "field": "State"},
+      "range": "width"
+    },
+    {
+      "name": "yscale",
+      "type": "linear",
+      "domain": [200,500],
+      "range": "height"
+
+
+    }
+  ],
+
+  "axes": [
+    { "orient": "bottom", "scale": "xscale", "title": "States"},
+    { "orient": "left", "scale": "yscale", "grid":"True",
+      "title": "Overall Mortality Rate per 100K Adults"}
+  ],
+
+  "legends": [
+  {
+    "fill": "mycolor",
+    "title": "Mortality Rate",
+    "properties": {
+       "title": {
+         "fontSize": {"value": 14}
+       }
+    },
+    "offset": 20,
+    "encode": {
+      "symbols": {
+        "update": {
+          "fillOpacity": {"value": 2.0},
+          "stroke": {"value": "transparent"}
+        }
+      }
+    }
+  }
+  ],
+
+  "marks": [
+    {
+      "type": "rect",
+      "from": {"data":"table"},
+      "encode": {
+        "enter": {
+           "fill": {"scale": "mycolor", "field": "rate"}
+        },
+        "update": {
+          "x": {"scale": "xscale", "field": "State", "offset": 1},
+          "width": {"scale": "xscale", "band": 1, "offset": -1},
+          "y": {"scale": "yscale", "field": "rate"},
+          "y2": {"scale": "yscale", "value": 0},
+          "fillOpacity": {"value": 1}
+        },
+        "hover": {
+          "fillOpacity": {"value": 0.5}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "align": {"value": "center"},
+          "baseline": {"value": "bottom"},
+          "fill": {"value": "#333"}
+        },
+        "update": {
+          "x": {"scale": "xscale", "signal": "tooltip.StateName", "band": 0.5},
+          "y": {"scale": "yscale", "signal": "tooltip.rate", "offset": -2},
+          "text": {"signal": "tooltip.amount"},
+          "fillOpacity": [
+            {"test": "datum === tooltip", "value": 0},
+            {"value": 1}
+          ]
+        }
+      }
+    }
+   ]
+}
