@@ -159,7 +159,9 @@
                             The x and y position is also used as a trigger to change opacity of the selected state in the map.
            </p>
            <h3>Parameters</h3>
-           <p class="lead" >The geopath data is loaded as a json object and used by d3 to render US maps. The data is quantified into three bins to show states with low, medium or high poverty/mortality rate.
+           <p class="lead" >The geopath data is read from CSV and loaded as a json object and used by d3 to render US maps.
+             The data is quantified into three bins to show states with low, medium or high poverty/mortality rate.
+             The poverty and heart disease related data is also read from csv directly into a JSON object and passed to d3 library functions.
            <p class="lead" >The backend d3 javascript for the map passes the state information and the div information to the javascript function rendering the bar charts.
              On page load, the bar chart show the data of California. If a user clicks on a state in map, javascript function receives divID, and state id as input paramter and refreshes bar
              chart with the data for the requested state. </p>
